@@ -168,11 +168,24 @@ function loadAttendees() {
   if (!saved) return [];
 
   const records = JSON.parse(saved);
-  if (!Array.isArray(records) || records.some((record) =>
-    !record || typeof record.sid !== 'string' ||
-    (record.clockIn !== null && typeof record.clockIn !== 'string') ||
-    (record.clockOut !== null && typeof record.clockOut !== 'string')
-  )) {
+  const seenIds = new Set();
+  const validTimestamp = (value) =>
+    value === null || (typeof value === 'string' && Number.isFinite(Date.parse(value)));
+  const validRecords = Array.isArray(records) && records.every((record) => {
+    if (!record || typeof record.sid !== 'string' ||
+        !/^[A-Z0-9-]{4,15}$/.test(record.sid) ||
+        seenIds.has(record.sid) ||
+        !validTimestamp(record.clockIn) ||
+        !validTimestamp(record.clockOut) ||
+        (record.clockOut && !record.clockIn) ||
+        (record.clockIn && record.clockOut && Date.parse(record.clockOut) < Date.parse(record.clockIn))) {
+      return false;
+    }
+    seenIds.add(record.sid);
+    return true;
+  });
+
+  if (!validRecords) {
     throw new Error('Saved attendance data has an unexpected format.');
   }
   return records;
