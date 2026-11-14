@@ -33,14 +33,31 @@ let storageReady = true;
 function setMenu(open) {
   siteNav.classList.toggle('open', open);
   menuToggle.setAttribute('aria-expanded', String(open));
+  if (open) siteNav.querySelector('a').focus();
 }
 
 menuToggle.addEventListener('click', () => setMenu(!siteNav.classList.contains('open')));
 siteNav.addEventListener('click', (event) => {
-  if (event.target.closest('a')) setMenu(false);
+  if (event.target.closest('a')) {
+    setMenu(false);
+    menuToggle.focus();
+  }
 });
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') setMenu(false);
+  if (event.key === 'Escape' && siteNav.classList.contains('open')) {
+    setMenu(false);
+    menuToggle.focus();
+  }
+});
+document.addEventListener('click', (event) => {
+  if (siteNav.classList.contains('open') &&
+      !siteNav.contains(event.target) &&
+      !menuToggle.contains(event.target)) {
+    setMenu(false);
+  }
+});
+window.matchMedia('(min-width: 700px)').addEventListener('change', (event) => {
+  if (event.matches) setMenu(false);
 });
 
 function updateCountdown() {
