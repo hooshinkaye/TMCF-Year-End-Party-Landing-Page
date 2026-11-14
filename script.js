@@ -15,6 +15,9 @@ const qrCode = document.getElementById('qrCode');
 const clockInBtn = document.getElementById('clockInBtn');
 const clockOutBtn = document.getElementById('clockOutBtn');
 const clockRecord = document.getElementById('clockRecord');
+const countdown = document.getElementById('eventCountdown');
+const countdownValue = document.getElementById('countdownValue');
+const countdownLabel = document.getElementById('countdownLabel');
 
 let currentStudentId = '';
 let attendees = [];
@@ -32,6 +35,28 @@ siteNav.addEventListener('click', (event) => {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') setMenu(false);
 });
+
+function updateCountdown() {
+  const [year, month, day] = countdown.dataset.eventDate.split('-').map(Number);
+  const eventDay = Date.UTC(year, month - 1, day);
+  const today = new Date();
+  const localToday = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+  const daysUntil = Math.ceil((eventDay - localToday) / 86400000);
+
+  if (daysUntil > 0) {
+    countdownValue.textContent = daysUntil;
+    countdownLabel.textContent = daysUntil === 1 ? 'day to go' : 'days to go';
+  } else if (daysUntil === 0) {
+    countdownValue.textContent = 'Today';
+    countdownLabel.textContent = 'is party day';
+  } else {
+    countdownValue.textContent = 'Thanks';
+    countdownLabel.textContent = 'for celebrating with us';
+  }
+}
+
+updateCountdown();
+window.setInterval(updateCountdown, 60000);
 
 function setError(message) {
   studentIdError.textContent = message;

@@ -58,6 +58,8 @@ h1, h2, h3, p, figure { margin-top: 0; }
 .btn-gold:hover:not(:disabled) { background: #ffda7c; }
 .hero-date { display: flex; align-items: center; gap: .8rem; margin: 2.4rem 0 0; color: rgba(255,255,255,.9); font-size: .72rem; font-weight: 700; letter-spacing: .11em; }
 .hero-date i { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); }
+.event-countdown { display: flex; width: fit-content; align-items: baseline; gap: .45rem; margin: 1.2rem 0 0; color: rgba(255,255,255,.78); font-size: .78rem; }
+.event-countdown strong { color: var(--gold); font-size: 1.35rem; line-height: 1; }
 .photo-caption { position: absolute; z-index: 1; right: max(1.25rem, calc((100vw - 1180px) / 2)); bottom: 1rem; margin: 0; color: rgba(255,255,255,.76); font-size: .68rem; letter-spacing: .05em; }
 
 .program-ribbon { overflow: hidden; color: var(--night); background: var(--gold); }
