@@ -92,6 +92,9 @@ h1, h2, h3, p, figure { margin-top: 0; }
 .fact { padding: 1.1rem 0; border-bottom: 1px solid rgba(255,255,255,.35); }
 .fact-number { display: block; margin-bottom: .45rem; color: var(--gold); font-size: .67rem; font-weight: 800; letter-spacing: .12em; }
 .fact p { margin: 0; font-size: .97rem; }
+.calendar-button { display: inline-flex; min-height: 44px; align-items: center; gap: .65rem; margin-top: 1.4rem; padding: .55rem .85rem; border: 1px solid rgba(255,255,255,.72); color: white; background: transparent; font: inherit; font-size: .82rem; font-weight: 700; cursor: pointer; }
+.calendar-button:hover { color: var(--night); background: white; }
+.calendar-button span { color: var(--gold); }
 
 .attendance-section { padding: clamp(4rem, 8vw, 7rem) 0 1.5rem; color: white; background-color: var(--night); background-image: radial-gradient(circle at 92% 9%, rgba(32, 88, 213, .3), transparent 27rem); }
 .attendance-layout { display: grid; gap: 2.5rem; align-items: start; }

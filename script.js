@@ -18,6 +18,7 @@ const clockRecord = document.getElementById('clockRecord');
 const countdown = document.getElementById('eventCountdown');
 const countdownValue = document.getElementById('countdownValue');
 const countdownLabel = document.getElementById('countdownLabel');
+const calendarButton = document.getElementById('calendarButton');
 
 let currentStudentId = '';
 let attendees = [];
@@ -57,6 +58,34 @@ function updateCountdown() {
 
 updateCountdown();
 window.setInterval(updateCountdown, 60000);
+
+calendarButton.addEventListener('click', () => {
+  const timestamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+  const eventLines = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Tan Ting Bing Memorial Colleges//Year End Party 2026//EN',
+    'CALSCALE:GREGORIAN',
+    'BEGIN:VEVENT',
+    'UID:yep2026-tmcfi@calendar.invalid',
+    `DTSTAMP:${timestamp}`,
+    'DTSTART:20261219T100000Z',
+    'SUMMARY:Year End Party 2026',
+    'LOCATION:School Quadrangle\\, Tan Ting Bing Memorial Colleges',
+    'DESCRIPTION:Parol Contest\\, Speech Choir\\, Spoken Poetry\\, and more.',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ];
+  const file = new Blob([eventLines.join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(file);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'tmcfi-year-end-party-2026.ics';
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+});
 
 function setError(message) {
   studentIdError.textContent = message;
