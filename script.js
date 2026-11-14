@@ -15,6 +15,7 @@ const qrCode = document.getElementById('qrCode');
 const clockInBtn = document.getElementById('clockInBtn');
 const clockOutBtn = document.getElementById('clockOutBtn');
 const clockRecord = document.getElementById('clockRecord');
+const downloadQrButton = document.getElementById('downloadQrButton');
 const countdown = document.getElementById('eventCountdown');
 const countdownValue = document.getElementById('countdownValue');
 const countdownLabel = document.getElementById('countdownLabel');
@@ -59,6 +60,17 @@ function updateCountdown() {
 updateCountdown();
 window.setInterval(updateCountdown, 60000);
 
+function downloadFile(file, fileName) {
+  const url = URL.createObjectURL(file);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = fileName;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
 calendarButton.addEventListener('click', () => {
   const timestamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
   const eventLines = [
@@ -77,14 +89,21 @@ calendarButton.addEventListener('click', () => {
     'END:VCALENDAR'
   ];
   const file = new Blob([eventLines.join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' });
-  const url = URL.createObjectURL(file);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'tmcfi-year-end-party-2026.ics';
-  document.body.append(link);
-  link.click();
-  link.remove();
-  URL.revokeObjectURL(url);
+  downloadFile(file, 'tmcfi-year-end-party-2026.ics');
+});
+
+downloadQrButton.addEventListener('click', () => {
+  const svg = qrCode.querySelector('svg');
+  if (!svg || !currentStudentId) {
+    showStatus('Create your QR pass before downloading it.', true);
+    return;
+  }
+
+  const svgFile = new Blob([new XMLSerializer().serializeToString(svg)], {
+    type: 'image/svg+xml;charset=utf-8'
+  });
+  downloadFile(svgFile, `tmcfi-year-end-party-2026-${currentStudentId.toLowerCase()}.svg`);
+  showStatus('QR code downloaded.', false);
 });
 
 function setError(message) {

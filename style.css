@@ -133,6 +133,8 @@ input.invalid { border-color: #a63d35; }
 .qr-frame { display: grid; width: 204px; height: 204px; place-items: center; margin: 0 auto; border: 1px solid var(--line); background: white; }
 .qr-frame svg { display: block; width: 180px; height: 180px; }
 .qr-caption { margin: .65rem 0 1rem; color: var(--muted); font-size: .78rem; text-align: center; }
+.pass-download { display: block; margin: 0 auto 1rem; padding: .3rem .55rem; border: 0; color: var(--blue); background: transparent; font: inherit; font-size: .82rem; font-weight: 700; text-decoration: underline; text-underline-offset: .15em; cursor: pointer; }
+.pass-download:hover { color: var(--night); }
 .attendance-actions { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; }
 .attendance-actions .btn { padding-inline: .5rem; }
 .clock-record { margin: .8rem 0 0; color: var(--muted); font-size: .78rem; text-align: center; }
