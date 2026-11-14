@@ -76,18 +76,31 @@
           </div>
           <div class="program-gallery" aria-label="Photos from TMCFian community celebrations">
             <figure class="gallery-main">
-              <img src="assets/parol-community-1.png" alt="TMCFians carrying a brightly lit parol" loading="lazy" decoding="async">
+              <button class="gallery-photo" type="button" aria-label="View TMCFians carrying a brightly lit parol">
+                <img src="assets/parol-community-1.png" alt="TMCFians carrying a brightly lit parol" loading="lazy" decoding="async">
+              </button>
               <figcaption>TMCFian Community</figcaption>
             </figure>
             <figure>
-              <img src="assets/parol-community-2.png" alt="Students gathered around a handmade parol" loading="lazy" decoding="async">
+              <button class="gallery-photo" type="button" aria-label="View students gathered around a handmade parol">
+                <img src="assets/parol-community-2.png" alt="Students gathered around a handmade parol" loading="lazy" decoding="async">
+              </button>
               <figcaption>Parol Contest</figcaption>
             </figure>
             <figure>
-              <img src="assets/parol-community-3.png" alt="Students with a glowing star-shaped parol" loading="lazy" decoding="async">
+              <button class="gallery-photo" type="button" aria-label="View students with a glowing star-shaped parol">
+                <img src="assets/parol-community-3.png" alt="Students with a glowing star-shaped parol" loading="lazy" decoding="async">
+              </button>
               <figcaption>Community moments</figcaption>
             </figure>
           </div>
+          <dialog class="photo-dialog" id="photoDialog" aria-label="Event photo">
+            <form method="dialog">
+              <button class="photo-dialog-close" type="submit" aria-label="Close photo">×</button>
+            </form>
+            <img id="photoDialogImage" alt="">
+            <p id="photoDialogCaption"></p>
+          </dialog>
         </div>
       </div>
     </section>

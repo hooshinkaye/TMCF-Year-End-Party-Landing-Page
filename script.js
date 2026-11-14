@@ -21,6 +21,10 @@ const countdown = document.getElementById('eventCountdown');
 const countdownValue = document.getElementById('countdownValue');
 const countdownLabel = document.getElementById('countdownLabel');
 const calendarButton = document.getElementById('calendarButton');
+const programGallery = document.querySelector('.program-gallery');
+const photoDialog = document.getElementById('photoDialog');
+const photoDialogImage = document.getElementById('photoDialogImage');
+const photoDialogCaption = document.getElementById('photoDialogCaption');
 
 let currentStudentId = '';
 let attendees = [];
@@ -105,6 +109,22 @@ downloadQrButton.addEventListener('click', () => {
   });
   downloadFile(svgFile, `tmcfi-year-end-party-2026-${currentStudentId.toLowerCase()}.svg`);
   showStatus('QR code downloaded.', false);
+});
+
+programGallery.addEventListener('click', (event) => {
+  const trigger = event.target.closest('.gallery-photo');
+  if (!trigger) return;
+
+  const image = trigger.querySelector('img');
+  const caption = trigger.parentElement.querySelector('figcaption');
+  photoDialogImage.src = image.currentSrc || image.src;
+  photoDialogImage.alt = image.alt;
+  photoDialogCaption.textContent = caption.textContent;
+  photoDialog.showModal();
+});
+
+photoDialog.addEventListener('click', (event) => {
+  if (event.target === photoDialog) photoDialog.close();
 });
 
 printPassButton.addEventListener('click', () => {
