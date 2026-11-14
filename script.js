@@ -152,6 +152,20 @@ printPassButton.addEventListener('click', () => {
   window.print();
 });
 
+window.addEventListener('storage', (event) => {
+  if (event.key !== STORAGE_KEY && event.key !== null) return;
+
+  try {
+    attendees = loadAttendees();
+    storageReady = true;
+    if (currentStudentId) renderPass();
+  } catch (error) {
+    storageReady = false;
+    showStatus('Saved attendance could not be read. Clear this site’s browser data to start fresh.', true);
+    passCard.hidden = true;
+  }
+});
+
 function setError(message) {
   studentIdError.textContent = message;
   studentIdInput.setAttribute('aria-invalid', String(Boolean(message)));
