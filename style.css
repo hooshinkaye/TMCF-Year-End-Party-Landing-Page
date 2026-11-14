@@ -133,7 +133,8 @@ input.invalid { border-color: #a63d35; }
 .qr-frame { display: grid; width: 204px; height: 204px; place-items: center; margin: 0 auto; border: 1px solid var(--line); background: white; }
 .qr-frame svg { display: block; width: 180px; height: 180px; }
 .qr-caption { margin: .65rem 0 1rem; color: var(--muted); font-size: .78rem; text-align: center; }
-.pass-download { display: block; margin: 0 auto 1rem; padding: .3rem .55rem; border: 0; color: var(--blue); background: transparent; font: inherit; font-size: .82rem; font-weight: 700; text-decoration: underline; text-underline-offset: .15em; cursor: pointer; }
+.pass-tools { display: flex; justify-content: center; gap: .75rem; margin-bottom: 1rem; }
+.pass-download { display: block; padding: .3rem .55rem; border: 0; color: var(--blue); background: transparent; font: inherit; font-size: .82rem; font-weight: 700; text-decoration: underline; text-underline-offset: .15em; cursor: pointer; }
 .pass-download:hover { color: var(--night); }
 .attendance-actions { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; }
 .attendance-actions .btn { padding-inline: .5rem; }
@@ -182,4 +183,23 @@ input.invalid { border-color: #a63d35; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; }
+}
+
+@media print {
+  @page { margin: 18mm; }
+  body * { visibility: hidden !important; }
+  #passCard:not([hidden]), #passCard:not([hidden]) * { visibility: visible !important; }
+  #passCard:not([hidden]) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block !important;
+    width: 100%;
+    max-width: 440px;
+    margin: 0;
+    border: 0;
+    color: #000;
+    background: #fff;
+  }
+  .pass-tools, .attendance-actions, .qr-caption { display: none !important; }
 }

@@ -16,6 +16,7 @@ const clockInBtn = document.getElementById('clockInBtn');
 const clockOutBtn = document.getElementById('clockOutBtn');
 const clockRecord = document.getElementById('clockRecord');
 const downloadQrButton = document.getElementById('downloadQrButton');
+const printPassButton = document.getElementById('printPassButton');
 const countdown = document.getElementById('eventCountdown');
 const countdownValue = document.getElementById('countdownValue');
 const countdownLabel = document.getElementById('countdownLabel');
@@ -104,6 +105,14 @@ downloadQrButton.addEventListener('click', () => {
   });
   downloadFile(svgFile, `tmcfi-year-end-party-2026-${currentStudentId.toLowerCase()}.svg`);
   showStatus('QR code downloaded.', false);
+});
+
+printPassButton.addEventListener('click', () => {
+  if (passCard.hidden) {
+    showStatus('Create your QR pass before printing it.', true);
+    return;
+  }
+  window.print();
 });
 
 function setError(message) {
