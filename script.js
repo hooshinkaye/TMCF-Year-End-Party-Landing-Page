@@ -264,10 +264,8 @@ function renderPass() {
 }
 
 function createPass(studentId) {
-  currentStudentId = studentId;
-  renderPass();
-
   if (typeof qrcode !== 'function') {
+    passCard.hidden = true;
     showStatus('The QR code tool did not load. Check your internet connection and try again.', true);
     return;
   }
@@ -277,8 +275,11 @@ function createPass(studentId) {
     code.addData(`YEP2026|${studentId}`);
     code.make();
     qrCode.innerHTML = code.createSvgTag(4, 0);
+    currentStudentId = studentId;
+    renderPass();
     showStatus('QR pass created. Keep it handy for the event.', false);
   } catch (error) {
+    passCard.hidden = true;
     showStatus('QR pass could not be created. Please try again.', true);
   }
 }
