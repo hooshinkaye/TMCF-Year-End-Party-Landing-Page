@@ -1,10 +1,15 @@
 # Tan Ting Bing Memorial Colleges — Year End Party 2026
 
-This site gives TMCFians one place to get a feel for the celebration and prepare for attendance. It features the school logo, photos from past events, and highlights from the program.
+This is the event page for the TMCFian Community’s Year End Party. It has the event details, program highlights, and photos from past celebrations.
 
-## What visitors can do
+Visitors can:
 
-- Browse the event highlights and photo gallery.
-- Enter a student number to create a personal QR pass.
-- Use the pass to record a clock-in and clock-out time.
-- Enter the same student number later to bring up the pass again.
+- See how many days are left before the party.
+- Open the event photos for a closer look.
+- Add the event to their calendar.
+- Create a QR pass with their student number, then download or print it.
+- Record clock-in and clock-out times with the pass.
+
+The attendance demo saves records in the browser on the device being used. It does not send attendance to the school or share it between devices. The QR generator loads from cdnjs, so an internet connection is needed to create a pass.
+
+The page uses plain HTML, CSS, and JavaScript. Open `index.html` in a browser to view it. The school logo and event photos are in `assets/`.
