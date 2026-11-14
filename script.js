@@ -143,6 +143,12 @@ programGallery.addEventListener('click', (event) => {
 photoDialog.addEventListener('click', (event) => {
   if (event.target === photoDialog) photoDialog.close();
 });
+photoDialog.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    photoDialog.close();
+  }
+});
 
 printPassButton.addEventListener('click', () => {
   if (passCard.hidden) {
